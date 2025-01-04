@@ -218,7 +218,7 @@ public class SpringBootJpaApplication implements CommandLineRunner {
         List<Object[]> registro = ipersonRepository.getUltimoRegistro();
         registro.forEach(regis ->{
             System.out.println("ID: " + regis[0] + ", Nombre: " + regis[1]);
-        });*/
+        });
 
         System.out.println("OBTIENE REGISTROS CON ID 1, 2 Y 3");
         List<Integer> ids = new ArrayList<>();
@@ -228,6 +228,34 @@ public class SpringBootJpaApplication implements CommandLineRunner {
         List<Person> personConIDs = ipersonRepository.getPersons(ids);
         for (var persona: personConIDs){
             System.out.println("persona = " + persona);
-        }
+        }*/
+
+        //Creamos una nueva entidad
+        /*System.out.println("Ingresa el nombre de la entidad: ");
+        var nombre = scanner.nextLine();
+        System.out.println("Ingresa los apellidos de la entidad: ");
+        var apellidos = scanner.nextLine();
+        System.out.println("Ingresa los lenguajes de programacion de la entidad: ");
+        var lenguajes = scanner.nextLine();
+
+        Person personaNueva = new Person(nombre, apellidos, lenguajes);
+        //Guardamos en la db
+        ipersonRepository.save(personaNueva);*/
+
+        //Actualizamos una entidad
+        System.out.println("Ingresa el ID de la persona a actualizar: ");
+        var id = Integer.parseInt(scanner.nextLine());
+        Person personaEncontrada = ipersonRepository.findById(id).orElse(null);
+        System.out.println("Ingresa los nuevos lenguajes: ");
+        var nuevosLenguajes = scanner.nextLine();
+        personaEncontrada.setLenguajeDeProgramacion(nuevosLenguajes);
+        ipersonRepository.save(personaEncontrada);
+
+        //Eliminamos una entidad
+        /*System.out.println("Ingresa el id de la entidad a eliminar");
+        var id = Integer.parseInt(scanner.nextLine());
+        Person persona = ipersonRepository.findById(id).orElse(null);
+        ipersonRepository.deleteById(id);*/
+
     }
 }

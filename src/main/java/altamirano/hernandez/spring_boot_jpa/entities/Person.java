@@ -13,6 +13,8 @@ public class Person {
     private String apellidos;
     @Column(name = "lenguaje_de_programacion")
     private String lenguajeDeProgramacion;
+    @Embedded
+    private Audit audit = new Audit();
 
     //Constructores
     public Person(){
@@ -64,6 +66,9 @@ public class Person {
                 ", nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 ", lenguajeDeProgramacion='" + lenguajeDeProgramacion + '\'' +
+                ", createdAt=" + audit.getCreatedAt() +
+                ", updatedAt=" + audit.getUpdatedAt() +
+                ", deletedAt=" + audit.getDeletedAt() +
                 '}';
     }
 }
