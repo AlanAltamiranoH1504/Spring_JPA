@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -27,13 +28,13 @@ public class SpringBootJpaApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("\n\t *** LISTA DE PERSONS ***");
+        /*System.out.println("\n\t *** LISTA DE PERSONS ***");
         List<Person> persons = (List<Person>) ipersonRepository.buscarPorLenguajedeProgramacion("Java");
         for (var person: persons){
             System.out.println("person = " + person);
         }
 
-        /*System.out.println("\n\t*** PERSONA EN ESPECIFICO ***");
+        System.out.println("\n\t*** PERSONA EN ESPECIFICO ***");
         var personaEncontrada = ipersonRepository.buscarPorNombre("Alan");
         System.out.println("personaEncontrada = " + personaEncontrada);
 
@@ -127,7 +128,7 @@ public class SpringBootJpaApplication implements CommandLineRunner {
 
         System.out.println("NUMERO DE LENGUAJES DE PROGRAMACION");
         int numeroLenguajes = ipersonRepository.numeroDeLenguajes();
-        System.out.println("numeroLenguajes = " + numeroLenguajes);*/
+        System.out.println("numeroLenguajes = " + numeroLenguajes);
 
         System.out.println("NOMBRES EN MAYUSCULAS");
         List<String> nombres = ipersonRepository.nombreUppercase();
@@ -150,6 +151,82 @@ public class SpringBootJpaApplication implements CommandLineRunner {
         System.out.println("BTWEEN");
         List<Person> personaBetween = ipersonRepository.personaBetween(1, 3);
         for (var persona: personaBetween){
+            System.out.println("persona = " + persona);
+        }
+
+        System.out.println("ORDENA ALFABETICAMENTE POR NOMBRES DE MANERA ASC");
+        List<Person> personsOrdenadosPorNombre = ipersonRepository.ordenarPorNombres();
+        for (var persona: personsOrdenadosPorNombre){
+            System.out.println("persona = " + persona);
+        }
+        System.out.println();
+
+        System.out.println("ORDENA POR LENGUAJE DE PROGRAMACION DE MANERA ASC");
+        List<Person> personsOrdenPorLenguajes = ipersonRepository.ordenarPorLenguajes();
+        for (var persona: personsOrdenPorLenguajes){
+            System.out.println("persona = " + persona);
+        }
+        System.out.println();
+
+        System.out.println("TOTAL DE REGISTROS EN LA TABLA");
+        var totalRegistros = ipersonRepository.totalRegistros();
+        System.out.println("totalRegistros = " + totalRegistros);
+        System.out.println();
+
+        System.out.println("ID MAXIMO DENTRO DE LA TABLA");
+        var idMaximo = ipersonRepository.idMaximo();
+        System.out.println("idMaximo = " + idMaximo);
+        System.out.println();
+
+        System.out.println("ID MINIMO");
+        var idMinimo = ipersonRepository.idMinimo();
+        System.out.println("idMinimo = " + idMinimo);
+        System.out.println();
+
+        System.out.println("EL LARGO DE LOS NOMBRES");
+        List<Integer> largoNombres = ipersonRepository.nombreMasLargo();
+        for (var nombre: largoNombres){
+            System.out.println("nombre = " + nombre);
+        }
+        System.out.println();
+
+        System.out.println("EL NOMBRE MAS CORTO");
+        Integer nombreMasCorto = ipersonRepository.getMinLengthNombre();
+        System.out.println("nombreMasCorto = " + nombreMasCorto);
+        System.out.println();
+
+        System.out.println("EL NOMBRE MAS LARGO");
+        int nombreMasLargo = ipersonRepository.getMaxLengthNombre();
+        System.out.println("nombreMasLargo = " + nombreMasLargo);
+
+        System.out.println("PROMEDIO DEL LARGO DE LOS NOMBRES");
+        var promedioLargoNombres = ipersonRepository.getAvgLargoNombres();
+        System.out.println("promedioLargoNombres = " + promedioLargoNombres);
+        System.out.println();
+
+        System.out.println("PROMEDIO DEL LARGO DE LOS APELLIDOS");
+        var promedioLargoApellidos = ipersonRepository.getAvgLargoApellidos();
+        System.out.println("promedioLargoApellidos = " + promedioLargoApellidos);
+
+        System.out.println("USUARIO CON EL NOMBRE MAS CORTO");
+        List<Object[]> registros = ipersonRepository.getShortNames();
+        registros.forEach(registro -> {
+            System.out.println("Nombre: " + registro[0] + ", Largo: " + registro[1]);
+        });
+
+        System.out.println("OBTIENE EL ULTIMO REGISTRO EN LA DB");
+        List<Object[]> registro = ipersonRepository.getUltimoRegistro();
+        registro.forEach(regis ->{
+            System.out.println("ID: " + regis[0] + ", Nombre: " + regis[1]);
+        });*/
+
+        System.out.println("OBTIENE REGISTROS CON ID 1, 2 Y 3");
+        List<Integer> ids = new ArrayList<>();
+        ids.add(1);
+        ids.add(2);
+        ids.add(3);
+        List<Person> personConIDs = ipersonRepository.getPersons(ids);
+        for (var persona: personConIDs){
             System.out.println("persona = " + persona);
         }
     }
